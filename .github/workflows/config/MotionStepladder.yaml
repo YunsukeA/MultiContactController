@@ -1,0 +1,427 @@
+transitions:
+  - [MCC::Initial_, OK, MCC::ConfigMotion_, Auto]
+
+states:
+  MCC::Initial_:
+    base: MCC::Initial
+    configs:
+      autoStartTime: 2.0
+
+  MCC::ConfigMotion_:
+    base: MCC::ConfigMotion
+    configs:
+      baseTime: Relative
+      stepCommandList:
+        - limb: LeftHand
+          pose:
+            translation: [0.3956286843554339, 0.19884472238166678, 1.01]
+            rotation:
+              [0.4790477373759348, -1.274846308961364, -0.49745929613539647]
+          swingCommand:
+            type: Add
+            startTime: 3.0
+            endTime: 11.0
+            config:
+              approachDurationRatio: 0.15
+              approachOffset: [0, 0, 0.03]
+              swingOffset: [0, 0, 0.12]
+          contactCommandList:
+            - time: 11.0
+              constraint:
+                type: Empty
+            - time: 12.0
+              constraint:
+                type: Grasp
+                fricCoeff: 1.0
+          gripperCommandList:
+            - time: 2.0
+              name: l_gripper
+              config:
+                opening: 0.5
+            - time: 11.0
+              name: l_gripper
+              config:
+                opening: 0.0
+        - limb: RightHand
+          pose:
+            translation: [0.3956286843554339, -0.19884472238166678, 1.01]
+            rotation:
+              [-0.4790477373759348, -1.274846308961364, 0.49745929613539647]
+          swingCommand:
+            type: Add
+            startTime: 3.0
+            endTime: 11.0
+            config:
+              approachDurationRatio: 0.15
+              approachOffset: [0, 0, 0.03]
+              swingOffset: [0, 0, 0.12]
+          contactCommandList:
+            - time: 11.0
+              constraint:
+                type: Empty
+            - time: 12.0
+              constraint:
+                type: Grasp
+                fricCoeff: 1.0
+          gripperCommandList:
+            - time: 2.0
+              name: r_gripper
+              config:
+                opening: 0.5
+            - time: 11.0
+              name: r_gripper
+              config:
+                opening: 0.0
+        - limb: LeftFoot
+          type: Add
+          startTime: 13.0
+          endTime: 15.0
+          pose:
+            translation: [0.10000000000000009, 0.11, 0.21]
+            rotation: [0.0, -0.0, 0.0]
+          constraint:
+            type: Surface
+            fricCoeff: 0.5
+            verticesName: LeftFootOnRung
+          swingConfig:
+            withdrawDurationRatio: 0.3
+            withdrawOffset: [-0.03, 0, 0.15]
+            approachDurationRatio: 0.2
+            approachOffset: [0, 0, 0.02]
+            swingOffset: [-0.05, 0, 0.15]
+        - limb: RightFoot
+          type: Add
+          startTime: 16.0
+          endTime: 18.0
+          pose:
+            translation: [0.10000000000000009, -0.11, 0.21]
+            rotation: [0.0, -0.0, 0.0]
+          constraint:
+            type: Surface
+            fricCoeff: 0.5
+            verticesName: RightFootOnRung
+          swingConfig:
+            withdrawDurationRatio: 0.3
+            withdrawOffset: [-0.03, 0, 0.15]
+            approachDurationRatio: 0.2
+            approachOffset: [0, 0, 0.02]
+            swingOffset: [-0.05, 0, 0.15]
+        - limb: LeftHand
+          pose:
+            translation:
+              [0.4856727003476614, 0.16731345180196386, 1.3074118095489748]
+            rotation:
+              [0.4790477373759348, -1.274846308961364, -0.49745929613539647]
+          swingCommand:
+            type: Add
+            startTime: 20.0
+            endTime: 24.0
+            config:
+              withdrawDurationRatio: 0.25
+              withdrawOffset: [0, 0, 0.03]
+              approachDurationRatio: 0.25
+              approachOffset: [0, 0, 0.03]
+              swingOffset: [0, 0, 0.13]
+          contactCommandList:
+            - time: 19.0
+              constraint:
+                type: Empty
+            - time: 20.0
+              constraint: {}
+            - time: 24.0
+              constraint:
+                type: Empty
+            - time: 25.0
+              constraint:
+                type: Grasp
+                fricCoeff: 1.0
+          gripperCommandList:
+            - time: 19.0
+              name: l_gripper
+              config:
+                opening: 0.5
+            - time: 24.0
+              name: l_gripper
+              config:
+                opening: 0.0
+        - limb: RightHand
+          pose:
+            translation:
+              [0.4856727003476614, -0.16731345180196386, 1.3074118095489748]
+            rotation:
+              [-0.4790477373759348, -1.274846308961364, 0.49745929613539647]
+          swingCommand:
+            type: Add
+            startTime: 27.0
+            endTime: 31.0
+            config:
+              withdrawDurationRatio: 0.25
+              withdrawOffset: [0, 0, 0.03]
+              approachDurationRatio: 0.25
+              approachOffset: [0, 0, 0.03]
+              swingOffset: [0, 0, 0.13]
+          contactCommandList:
+            - time: 26.0
+              constraint:
+                type: Empty
+            - time: 27.0
+              constraint: {}
+            - time: 31.0
+              constraint:
+                type: Empty
+            - time: 32.0
+              constraint:
+                type: Grasp
+                fricCoeff: 1.0
+          gripperCommandList:
+            - time: 26.0
+              name: r_gripper
+              config:
+                opening: 0.5
+            - time: 31.0
+              name: r_gripper
+              config:
+                opening: 0.0
+        - limb: LeftFoot
+          type: Add
+          startTime: 33.0
+          endTime: 35.0
+          pose:
+            translation: [0.185, 0.11, 0.51]
+            rotation: [0.0, -0.0, 0.0]
+          constraint:
+            type: Surface
+            fricCoeff: 0.5
+            verticesName: LeftFootOnRung
+          swingConfig:
+            withdrawDurationRatio: 0.3
+            withdrawOffset: [-0.03, 0, 0.15]
+            approachDurationRatio: 0.2
+            approachOffset: [0, 0, 0.02]
+            swingOffset: [-0.05, 0, 0.15]
+        - limb: RightFoot
+          type: Add
+          startTime: 36.0
+          endTime: 38.0
+          pose:
+            translation: [0.185, -0.11, 0.51]
+            rotation: [0.0, -0.0, 0.0]
+          constraint:
+            type: Surface
+            fricCoeff: 0.5
+            verticesName: RightFootOnRung
+          swingConfig:
+            withdrawDurationRatio: 0.3
+            withdrawOffset: [-0.03, 0, 0.15]
+            approachDurationRatio: 0.2
+            approachOffset: [0, 0, 0.02]
+            swingOffset: [-0.05, 0, 0.15]
+        - limb: LeftHand
+          pose:
+            translation:
+              [0.5757167163398889, 0.1357821812222609, 1.6048236190979497]
+            rotation:
+              [0.4790477373759348, -1.274846308961364, -0.49745929613539647]
+          swingCommand:
+            type: Add
+            startTime: 40.0
+            endTime: 44.0
+            config:
+              withdrawDurationRatio: 0.25
+              withdrawOffset: [0, 0, 0.03]
+              approachDurationRatio: 0.25
+              approachOffset: [0, 0, 0.03]
+              swingOffset: [0, 0, 0.13]
+          contactCommandList:
+            - time: 39.0
+              constraint:
+                type: Empty
+            - time: 40.0
+              constraint: {}
+            - time: 44.0
+              constraint:
+                type: Empty
+            - time: 45.0
+              constraint:
+                type: Grasp
+                fricCoeff: 1.0
+          gripperCommandList:
+            - time: 39.0
+              name: l_gripper
+              config:
+                opening: 0.5
+            - time: 44.0
+              name: l_gripper
+              config:
+                opening: 0.0
+        - limb: RightHand
+          pose:
+            translation:
+              [0.5757167163398889, -0.1357821812222609, 1.6048236190979497]
+            rotation:
+              [-0.4790477373759348, -1.274846308961364, 0.49745929613539647]
+          swingCommand:
+            type: Add
+            startTime: 47.0
+            endTime: 51.0
+            config:
+              withdrawDurationRatio: 0.25
+              withdrawOffset: [0, 0, 0.03]
+              approachDurationRatio: 0.25
+              approachOffset: [0, 0, 0.03]
+              swingOffset: [0, 0, 0.13]
+          contactCommandList:
+            - time: 46.0
+              constraint:
+                type: Empty
+            - time: 47.0
+              constraint: {}
+            - time: 51.0
+              constraint:
+                type: Empty
+            - time: 52.0
+              constraint:
+                type: Grasp
+                fricCoeff: 1.0
+          gripperCommandList:
+            - time: 46.0
+              name: r_gripper
+              config:
+                opening: 0.5
+            - time: 51.0
+              name: r_gripper
+              config:
+                opening: 0.0
+        - limb: LeftFoot
+          type: Add
+          startTime: 53.0
+          endTime: 55.0
+          pose:
+            translation: [0.27, 0.11, 0.81]
+            rotation: [0.0, -0.0, 0.0]
+          constraint:
+            type: Surface
+            fricCoeff: 0.5
+            verticesName: LeftFootOnRung
+          swingConfig:
+            withdrawDurationRatio: 0.3
+            withdrawOffset: [-0.03, 0, 0.15]
+            approachDurationRatio: 0.2
+            approachOffset: [0, 0, 0.02]
+            swingOffset: [-0.05, 0, 0.15]
+        - limb: RightFoot
+          type: Add
+          startTime: 56.0
+          endTime: 58.0
+          pose:
+            translation: [0.27, -0.11, 0.81]
+            rotation: [0.0, -0.0, 0.0]
+          constraint:
+            type: Surface
+            fricCoeff: 0.5
+            verticesName: RightFootOnRung
+          swingConfig:
+            withdrawDurationRatio: 0.3
+            withdrawOffset: [-0.03, 0, 0.15]
+            approachDurationRatio: 0.2
+            approachOffset: [0, 0, 0.02]
+            swingOffset: [-0.05, 0, 0.15]
+      nominalCentroidalPoseList:
+        - time: 13.0
+          pose:
+            translation: [-0.15, 0.0, 0.8999999999999999]
+        - time: 15.0
+          pose:
+            translation: [-0.15000000000000002, 0.0, 0.95]
+        - time: 16.0
+          pose:
+            translation: [-0.15000000000000002, 0.0, 1.0]
+        - time: 18.0
+          pose:
+            translation: [-0.15000000000000002, 0.0, 1.05]
+        - time: 33.0
+          pose:
+            translation: [-0.12875000000000003, 0.0, 1.125]
+        - time: 35.0
+          pose:
+            translation: [-0.10750000000000004, 0.0, 1.2000000000000002]
+        - time: 36.0
+          pose:
+            translation: [-0.08625000000000005, 0.0, 1.2750000000000001]
+        - time: 38.0
+          pose:
+            translation: [-0.06500000000000006, 0.0, 1.35]
+        - time: 53.0
+          pose:
+            translation: [-0.04375000000000004, 0.0, 1.4250000000000003]
+        - time: 55.0
+          pose:
+            translation: [-0.02250000000000002, 0.0, 1.5]
+        - time: 56.0
+          pose:
+            translation: [-0.0012500000000000011, 0.0, 1.5749999999999997]
+        - time: 58.0
+          pose:
+            translation: [0.020000000000000018, 0.0, 1.65]
+
+LimbTaskList:
+  - type: firstOrderImpedance
+    limb: LeftFoot
+    frame: LeftFootCenter
+    cutoffPeriod: 0.01
+    weight: 1000.0
+  - type: firstOrderImpedance
+    limb: RightFoot
+    frame: RightFootCenter
+    cutoffPeriod: 0.01
+    weight: 1000.0
+  - type: firstOrderImpedance
+    limb: LeftHand
+    frame: LeftHandGripper
+    cutoffPeriod: 0.01
+    weight: 1000.0
+  - type: firstOrderImpedance
+    limb: RightHand
+    frame: RightHandGripper
+    cutoffPeriod: 0.01
+    weight: 1000.0
+
+LimbManagerSet:
+  LimbManager:
+    Hand:
+      impedanceGains:
+        MultiContact:
+          damper:
+            linear: [5e4, 5e4, 5e4]
+            angular: [100, 100, 100]
+          spring:
+            linear: [0, 0, 0]
+            angular: [0, 0, 2000]
+          wrench:
+            linear: [1, 1, 1]
+            angular: [1, 1, 0]
+
+CentroidalManager:
+  nominalCentroidalPoseBaseFrame: World
+  mpcWeightParam:
+    runningPos: [10.0, 10.0, 10.0]
+    terminalPos: [10.0, 10.0, 10.0]
+
+  # DDP
+  method: DDP
+  horizonDuration: 1.0 # [sec]
+  horizonDt: 0.02 # [sec]
+  ddpMaxIter: 1
+
+  # # PreviewControl
+  # method: PC
+  # horizonDuration: 2.0 # [sec]
+  # horizonDt: 0.005 # [sec]
+
+robots:
+  # Environment models
+  stepladder:
+    module: CnoidEnv/Stepladder
+    init_pos:
+      translation: [0.65, 0.0, 0.0]
+# OverwriteConfigKeys: [NoSensors]
