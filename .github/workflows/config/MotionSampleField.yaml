@@ -1,12 +1,12 @@
 transitions:
-  - [MCC::Initial_, OK, MCC::ConfigMotion1_, Auto]  # FSM state name?
+  - [MCC::Initial_, OK, MCC::ConfigMotion1_, Auto] # FSM state name?
   - [MCC::ConfigMotion1_, OK, MCC::ConfigMotion2_, Auto] # FSM state name?
 
 #  see ../../../src/states/*.cpp
 
 states: # FSMA state1, meta task. see https://jrl.cnrs.fr/mc_rtc/jp/json.html#MetaTask, https://jrl.cnrs.fr/mc_rtc/jp/json.html#State/MetaTasks
   MCC::Initial_: # name of new FSM
-    base: MCC::Initial # base name of cpp class that will be based on. 
+    base: MCC::Initial # base name of cpp class that will be based on.
     configs:
       autoStartTime: 2.0
       gripperCommands:
@@ -298,12 +298,12 @@ LimbTaskList:
     weight: 1000.0
   - type: firstOrderImpedance
     limb: LeftHand
-    frame: LeftHandGraspFrame
+    frame: LeftHandCloseContact
     cutoffPeriod: 0.01
     weight: 1000.0
   - type: firstOrderImpedance
     limb: RightHand
-    frame: RightHandOpenFrame
+    frame: RightHandCloseContact
     cutoffPeriod: 0.01
     weight: 1000.0
 
@@ -347,16 +347,16 @@ robots:
     module: MCC/SampleField
 
   # Robot-specific configurations
-  jvrc1:
-    frames:
-      - name: LeftHandGraspFrame
-        parent: l_wrist
-        X_p_f:
-          translation: [0.0, -0.0085, -0.110]
-      - name: RightHandOpenFrame
-        parent: r_wrist
-        X_p_f:
-          translation: [0.0, 0.0085, -0.1225]
+  HRP5P:
+    # frames:
+    #   - name: LeftHandGraspFrame
+    #     parent: l_gripper
+    #     X_p_f:
+    #       translation: [0.0, -0.0085, -0.110]
+    #   - name: RightHandOpenFrame
+    #     parent: r_gripper
+    #     X_p_f:
+    #       translation: [0.0, 0.0085, -0.1225]
 
     PostureTask:
       target:
@@ -384,13 +384,26 @@ robots:
     Contacts:
       Surface:
         - name: LeftFoot
-          vertices: [[-0.1, -0.04, 0.0], [-0.1, 0.04, 0.0], [0.1, 0.04, 0.0], [0.1, -0.04, 0.0]]
+          vertices:
+            [
+              [-0.1, -0.04, 0.0],
+              [-0.1, 0.04, 0.0],
+              [0.1, 0.04, 0.0],
+              [0.1, -0.04, 0.0],
+            ]
         - name: RightFoot
-          vertices: [[-0.1, -0.04, 0.0], [-0.1, 0.04, 0.0], [0.1, 0.04, 0.0], [0.1, -0.04, 0.0]]
+          vertices:
+            [
+              [-0.1, -0.04, 0.0],
+              [-0.1, 0.04, 0.0],
+              [0.1, 0.04, 0.0],
+              [0.1, -0.04, 0.0],
+            ]
         - name: LeftHand
           vertices: [[0.025, 0.05, 0.0], [-0.025, 0.05, 0.0], [0.0, -0.05, 0.0]]
         - name: RightHand
-          vertices: [[0.025, -0.05, 0.0], [-0.025, -0.05, 0.0], [0.0, 0.05, 0.0]]
+          vertices:
+            [[0.025, -0.05, 0.0], [-0.025, -0.05, 0.0], [0.0, 0.05, 0.0]]
 
       Grasp:
         - name: LeftHand

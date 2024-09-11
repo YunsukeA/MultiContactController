@@ -286,7 +286,7 @@ robots:
     module: env/ground
 
   # Robot-specific configurations
-  jvrc1:
+  HRP5P:
     PostureTask:
       jointWeights:
         WAIST_R: 100
