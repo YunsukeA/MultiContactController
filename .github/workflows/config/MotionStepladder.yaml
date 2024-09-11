@@ -298,8 +298,8 @@ OverwriteConfigList:
 
 robots:
   # Environment models
-  sample_stepladder:
-    module: MCC/SampleStepladder
+  stepladder:
+    module: MCC/Stepladder
     init_pos:
       translation: [0.2, 0.0, 0.0]
 

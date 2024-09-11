@@ -1,4 +1,4 @@
-<mujoco model="Stepladder">
+<mujoco model="Stepladder_old">
     <compiler angle="radian" autolimits="true"/>
 
     <asset>
