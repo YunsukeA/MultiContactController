@@ -1,0 +1,14 @@
+<mujoco model="Stepladder">
+    <compiler angle="radian" autolimits="true"/>
+
+    <asset>
+        <mesh name="Stepladder" file="/home/aoyaman/devel/src/catkin_ws/src/CnoidEnv/model/mesh/Stepladder/HasegawaRAX18.stl"/>
+    </asset>
+
+    <worldbody>
+        <body name="stepladder_body">
+            <geom type="mesh" mesh="Stepladder" rgba="0 1 0 1"/>
+            <geom type="mesh" mesh="Stepladder" group="1" rgba="1 0.5 0 1" contype="0" conaffinity="0"/>
+        </body>
+    </worldbody>
+</mujoco>
