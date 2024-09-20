@@ -1,12 +1,10 @@
 transitions:
-  - [MCC::Initial_, OK, MCC::ConfigMotion1_, Auto]  # FSM state name?
-  - [MCC::ConfigMotion1_, OK, MCC::ConfigMotion2_, Auto] # FSM state name?
+  - [MCC::Initial_, OK, MCC::ConfigMotion1_, Auto]
+  - [MCC::ConfigMotion1_, OK, MCC::ConfigMotion2_, Auto]
 
-#  see ../../../src/states/*.cpp
-
-states: # FSMA state1, meta task. see https://jrl.cnrs.fr/mc_rtc/jp/json.html#MetaTask, https://jrl.cnrs.fr/mc_rtc/jp/json.html#State/MetaTasks
-  MCC::Initial_: # name of new FSM
-    base: MCC::Initial # base name of cpp class that will be based on. 
+states:
+  MCC::Initial_:
+    base: MCC::Initial
     configs:
       autoStartTime: 2.0
       gripperCommands:
@@ -20,7 +18,7 @@ states: # FSMA state1, meta task. see https://jrl.cnrs.fr/mc_rtc/jp/json.html#Me
     configs:
       baseTime: Relative
       stepCommandList:
-        - limb: LeftFoot # step(walk) command
+        - limb: LeftFoot
           type: Add
           startTime: 2.0
           endTime: 3.0
@@ -384,13 +382,26 @@ robots:
     Contacts:
       Surface:
         - name: LeftFoot
-          vertices: [[-0.1, -0.04, 0.0], [-0.1, 0.04, 0.0], [0.1, 0.04, 0.0], [0.1, -0.04, 0.0]]
+          vertices:
+            [
+              [-0.1, -0.04, 0.0],
+              [-0.1, 0.04, 0.0],
+              [0.1, 0.04, 0.0],
+              [0.1, -0.04, 0.0],
+            ]
         - name: RightFoot
-          vertices: [[-0.1, -0.04, 0.0], [-0.1, 0.04, 0.0], [0.1, 0.04, 0.0], [0.1, -0.04, 0.0]]
+          vertices:
+            [
+              [-0.1, -0.04, 0.0],
+              [-0.1, 0.04, 0.0],
+              [0.1, 0.04, 0.0],
+              [0.1, -0.04, 0.0],
+            ]
         - name: LeftHand
           vertices: [[0.025, 0.05, 0.0], [-0.025, 0.05, 0.0], [0.0, -0.05, 0.0]]
         - name: RightHand
-          vertices: [[0.025, -0.05, 0.0], [-0.025, -0.05, 0.0], [0.0, 0.05, 0.0]]
+          vertices:
+            [[0.025, -0.05, 0.0], [-0.025, -0.05, 0.0], [0.0, 0.05, 0.0]]
 
       Grasp:
         - name: LeftHand

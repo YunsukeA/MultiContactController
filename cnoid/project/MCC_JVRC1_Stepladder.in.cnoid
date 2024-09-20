@@ -168,21 +168,21 @@ items:
             zmp: [ 0, 0, 0 ]
         - 
           id: 7
-          name: "SampleField"
+          name: "SampleStepladder"
           plugin: Body
           class: BodyItem
           is_checked: true
           data: 
-            file: "@MCC_MODEL_DIR@/SampleField.body"
+            file: "@MCC_MODEL_DIR@/SampleStepladder.body"
             currentBaseLink: "Root"
             format: CHOREONOID-BODY
-            rootPosition: [ 0, 0, 0 ]
+            rootPosition: [ 0.2, 0, 0 ]
             rootAttitude: [ 
               1, 0, 0, 
               0, 1, 0, 
               0, 0, 1 ]
             jointPositions: [  ]
-            initialRootPosition: [ 0, 0, 0 ]
+            initialRootPosition: [ 0.2, 0, 0 ]
             initialRootAttitude: [ 
               1, 0, 0, 
               0, 1, 0, 
@@ -327,9 +327,9 @@ views:
         - 
           camera: [ System, Perspective ]
           isCurrent: true
-          eye: [ 4.50599, 2.27716, 3.22118 ]
-          direction: [ -0.694451, -0.485365, -0.531186 ]
-          up: [ -0.435386, -0.304299, 0.847255 ]
+          eye: [ -0.522057, -3.37103, 2.57327 ]
+          direction: [ 0.381657, 0.833936, -0.398609 ]
+          up: [ 0.16588, 0.362454, 0.917121 ]
         - 
           camera: [ System, Orthographic ]
           orthoHeight: 20

@@ -1,21 +1,19 @@
 materials:
-  -
-    name: Default
+  - name: Default
     roughness: 1.0
-  -
-    name: Floor
+  - name: Floor
     roughness: 1.0
-  -
-    name: Field
+  - name: Field
+    roughness: 1.0
+  - name: Stepladder
     roughness: 1.0
 
 contactMaterials:
-  -
-    materials: [ Default, Default ]
+  - materials: [Default, Default]
     friction: 0.5
-  -
-    materials: [ Default, Floor ]
+  - materials: [Default, Floor]
     friction: 0.5
-  -
-    materials: [ Field, Floor ]
+  - materials: [Field, Floor]
+    friction: 0.5
+  - materials: [Stepladder, Floor]
     friction: 0.5
