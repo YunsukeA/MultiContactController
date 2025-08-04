@@ -1,5 +1,6 @@
 *~
 *.pyc
+*.idx
 
 GPATH
 GRTAGS
@@ -7,3 +8,6 @@ GSYMS
 GTAGS
 
 etc/mc_rtc.yaml
+
+build
+compile_commands.json
