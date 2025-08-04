@@ -1,6 +1,6 @@
 #include <limits>
 
-#include <mc_tasks/FirstOrderImpedanceTask.h>
+#include <mc_tasks/ObserverbasedImpedanceTask.h>
 
 #include <ForceColl/Contact.h>
 
@@ -680,7 +680,7 @@ std::array<double, 2> LimbManager::getClosestContactTimes(double t) const
   }
 }
 
-const std::shared_ptr<mc_tasks::force::FirstOrderImpedanceTask> & LimbManager::limbTask() const
+const std::shared_ptr<mc_tasks::force::ObserverbasedImpedanceTask> & LimbManager::limbTask() const
 {
   return ctl().limbTasks_.at(limb_);
 }

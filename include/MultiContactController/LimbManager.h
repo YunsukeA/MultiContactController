@@ -16,7 +16,7 @@ namespace mc_tasks
 {
 namespace force
 {
-struct FirstOrderImpedanceTask;
+struct ObserverbasedImpedanceTask;
 }
 } // namespace mc_tasks
 
@@ -197,7 +197,7 @@ protected:
   }
 
   /** \brief Accessor to the limb task. */
-  const std::shared_ptr<mc_tasks::force::FirstOrderImpedanceTask> & limbTask() const;
+  const std::shared_ptr<mc_tasks::force::ObserverbasedImpedanceTask> & limbTask() const;
 
   /** \brief Detect touch down.
       \return true if touch down is detected during swing

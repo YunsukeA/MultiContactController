@@ -12,8 +12,8 @@ struct MomentumTask;
 
 namespace force
 {
-struct FirstOrderImpedanceTask;
-}
+struct ObserverbasedImpedanceTask;
+} // namespace force
 } // namespace mc_tasks
 
 namespace MCC
@@ -91,7 +91,7 @@ public:
   std::shared_ptr<mc_tasks::MomentumTask> momentumTask_;
 
   //! Limb tasks
-  std::unordered_map<Limb, std::shared_ptr<mc_tasks::force::FirstOrderImpedanceTask>> limbTasks_;
+  std::unordered_map<Limb, std::shared_ptr<mc_tasks::force::ObserverbasedImpedanceTask>> limbTasks_;
 
   //! Limb manager set
   std::shared_ptr<LimbManagerSet> limbManagerSet_;

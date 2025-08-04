@@ -1,9 +1,9 @@
 #include <sys/syscall.h>
 
 #include <mc_tasks/CoMTask.h>
-#include <mc_tasks/FirstOrderImpedanceTask.h>
 #include <mc_tasks/MetaTaskLoader.h>
 #include <mc_tasks/MomentumTask.h>
+#include <mc_tasks/ObserverbasedImpedanceTask.h>
 #include <mc_tasks/OrientationTask.h>
 
 #include <ForceColl/Contact.h>
@@ -80,7 +80,7 @@ MultiContactController::MultiContactController(mc_rbdyn::RobotModulePtr rm,
     {
       Limb limb = Limb(limbTaskConfig("limb"));
       limbTasks_.emplace(
-          limb, mc_tasks::MetaTaskLoader::load<mc_tasks::force::FirstOrderImpedanceTask>(solver(), limbTaskConfig));
+          limb, mc_tasks::MetaTaskLoader::load<mc_tasks::force::ObserverbasedImpedanceTask>(solver(), limbTaskConfig));
       limbTasks_.at(limb)->name("LimbTask_" + std::to_string(limb));
     }
   }

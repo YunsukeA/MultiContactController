@@ -1,6 +1,6 @@
 #include <mc_rtc/constants.h>
 #include <mc_rtc/gui/Form.h>
-#include <mc_tasks/FirstOrderImpedanceTask.h>
+#include <mc_tasks/ObserverbasedImpedanceTask.h>
 
 #include <MultiContactController/LimbManagerSet.h>
 #include <MultiContactController/MathUtils.h>
@@ -42,7 +42,8 @@ void GuiWalkState::start(mc_control::fsm::Controller & _ctl)
   ctl().gui()->addElement({ctl().name(), "GuiWalk"},
                           mc_rtc::gui::Form(
                               "Walk",
-                              [this](const mc_rtc::Configuration & config) {
+                              [this](const mc_rtc::Configuration & config)
+                              {
                                 sendWalkCommand(
                                     Eigen::Vector3d(config(walkConfigKeys_.at("x")), config(walkConfigKeys_.at("y")),
                                                     mc_rtc::constants::toRad(config(walkConfigKeys_.at("theta")))),
@@ -76,12 +77,12 @@ bool GuiWalkState::sendWalkCommand(const Eigen::Vector3d & targetTrans, int last
     return false;
   }
 
-  auto convertTo2d = [](const sva::PTransformd & pose) -> Eigen::Vector3d {
+  auto convertTo2d = [](const sva::PTransformd & pose) -> Eigen::Vector3d
+  {
     return Eigen::Vector3d(pose.translation().x(), pose.translation().y(), mc_rbdyn::rpyFromMat(pose.rotation()).z());
   };
-  auto convertTo3d = [](const Eigen::Vector3d & trans) -> sva::PTransformd {
-    return sva::PTransformd(sva::RotZ(trans.z()), Eigen::Vector3d(trans.x(), trans.y(), 0));
-  };
+  auto convertTo3d = [](const Eigen::Vector3d & trans) -> sva::PTransformd
+  { return sva::PTransformd(sva::RotZ(trans.z()), Eigen::Vector3d(trans.x(), trans.y(), 0)); };
 
   // The 2D variables (i.e., targetTrans, deltaTrans) represent the transformation relative to the initial pose,
   // while the 3D variables (i.e., initialFootMidpose, goalFootMidpose, footMidpose) represent the

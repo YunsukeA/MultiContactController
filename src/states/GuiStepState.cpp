@@ -1,6 +1,6 @@
 #include <mc_rtc/constants.h>
 #include <mc_rtc/gui/Form.h>
-#include <mc_tasks/FirstOrderImpedanceTask.h>
+#include <mc_tasks/ObserverbasedImpedanceTask.h>
 
 #include <MultiContactController/LimbManagerSet.h>
 #include <MultiContactController/MultiContactController.h>

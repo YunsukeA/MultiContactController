@@ -7,8 +7,8 @@
 #include <mc_rtc/gui/NumberInput.h>
 #include <mc_rtc/gui/plot.h>
 #include <mc_tasks/CoMTask.h>
-#include <mc_tasks/FirstOrderImpedanceTask.h>
 #include <mc_tasks/MomentumTask.h>
+#include <mc_tasks/ObserverbasedImpedanceTask.h>
 #include <mc_tasks/OrientationTask.h>
 
 #include <ForceColl/WrenchDistribution.h>
@@ -292,7 +292,8 @@ void CentroidalManager::update()
   {
     Eigen::Vector3d zmpPlaneOrigin = calcAnchorFrame(ctl().robot()).translation();
     Eigen::Vector3d zmpPlaneNormal = Eigen::Vector3d::UnitZ();
-    auto calcZmp = [&](const sva::ForceVecd & wrench, const Eigen::Vector3d & momentOrigin) {
+    auto calcZmp = [&](const sva::ForceVecd & wrench, const Eigen::Vector3d & momentOrigin)
+    {
       Eigen::Vector3d zmp = zmpPlaneOrigin;
       if(wrench.force().z() > 0)
       {
@@ -335,9 +336,8 @@ void CentroidalManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
   centroidMarkerSize = ((2.0 / robotMass_) * centroidMarkerSize).cwiseSqrt();
   gui.addElement({ctl().name(), config().name, "Status"},
                  mc_rtc::gui::Ellipsoid(
-                     "plannedCentroidalPose", centroidMarkerSize,
-                     [this]() -> const sva::PTransformd & { return controlData_.plannedCentroidalPose; },
-                     mc_rtc::gui::Color(0.0, 1.0, 0.0, 0.8)));
+                     "plannedCentroidalPose", centroidMarkerSize, [this]() -> const sva::PTransformd &
+                     { return controlData_.plannedCentroidalPose; }, mc_rtc::gui::Color(0.0, 1.0, 0.0, 0.8)));
   gui.addElement(
       {ctl().name(), config().name, "Config"},
       mc_rtc::gui::Label("method", [this]() -> const std::string & { return config().method; }),
@@ -346,9 +346,8 @@ void CentroidalManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
           [this]() -> const std::string & { return config().nominalCentroidalPoseBaseFrame; },
           [this](const std::string & v) { config().nominalCentroidalPoseBaseFrame = v; }),
       mc_rtc::gui::ComboInput(
-          "refComZPolicy", {"Average", "Constant", "Min", "Max"},
-          [this]() -> const std::string & { return config().refComZPolicy; },
-          [this](const std::string & v) { config().refComZPolicy = v; }),
+          "refComZPolicy", {"Average", "Constant", "Min", "Max"}, [this]() -> const std::string &
+          { return config().refComZPolicy; }, [this](const std::string & v) { config().refComZPolicy = v; }),
       mc_rtc::gui::ArrayInput(
           "Centroidal P-Gain", {"ax", "ay", "az", "lx", "ly", "lz"},
           [this]() -> const sva::ImpedanceVecd & { return config().centroidalGainP; },
@@ -368,10 +367,8 @@ void CentroidalManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
           [this]() { config().enableCentroidalFeedback = !config().enableCentroidalFeedback; }),
       mc_rtc::gui::Checkbox(
           "useTargetPoseForControlRobotAnchorFrame",
-          [this]() { return config().useTargetPoseForControlRobotAnchorFrame; },
-          [this]() {
-            config().useTargetPoseForControlRobotAnchorFrame = !config().useTargetPoseForControlRobotAnchorFrame;
-          }),
+          [this]() { return config().useTargetPoseForControlRobotAnchorFrame; }, [this]()
+          { config().useTargetPoseForControlRobotAnchorFrame = !config().useTargetPoseForControlRobotAnchorFrame; }),
       mc_rtc::gui::Checkbox(
           "useActualComForWrenchDist", [this]() { return config().useActualComForWrenchDist; },
           [this]() { config().useActualComForWrenchDist = !config().useActualComForWrenchDist; }),
@@ -383,7 +380,8 @@ void CentroidalManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
       {ctl().name(), config().name, "Plot"}, mc_rtc::gui::ElementsStacking::Horizontal,
       mc_rtc::gui::Button(
           "Plot CoM-ZMP-X",
-          [this, &gui]() {
+          [this, &gui]()
+          {
             using namespace mc_rtc::gui;
             gui.addPlot(
                 "CoM-ZMP-X", plot::X("t", [this]() { return ctl().t(); }),
@@ -411,7 +409,8 @@ void CentroidalManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
       {ctl().name(), config().name, "Plot"}, mc_rtc::gui::ElementsStacking::Horizontal,
       mc_rtc::gui::Button(
           "Plot CoM-ZMP-Y",
-          [this, &gui]() {
+          [this, &gui]()
+          {
             using namespace mc_rtc::gui;
             gui.addPlot(
                 "CoM-ZMP-Y", plot::X("t", [this]() { return ctl().t(); }),
