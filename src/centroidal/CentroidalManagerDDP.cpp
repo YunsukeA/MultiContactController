@@ -62,14 +62,14 @@ void CentroidalManagerDDP::addToGUI(mc_rtc::gui::StateBuilder & gui)
 {
   CentroidalManager::addToGUI(gui);
 
-  gui.addElement(
-      {ctl().name(), config_.name, "Config"},
-      mc_rtc::gui::ArrayInput(
-          "Angular P-Gain", {"x", "y", "z"}, [this]() -> const Eigen::Vector3d & { return config_.angularGainP; },
-          [this](const Eigen::Vector3d & v) { config_.angularGainP = v; }),
-      mc_rtc::gui::ArrayInput(
-          "Angular D-Gain", {"x", "y", "z"}, [this]() -> const Eigen::Vector3d & { return config_.angularGainD; },
-          [this](const Eigen::Vector3d & v) { config_.angularGainD = v; }));
+  gui.addElement({ctl().name(), config_.name, "Config"},
+                 mc_rtc::gui::ArrayInput(
+                     "Angular P-Gain", {"x", "y", "z"}, [this]() -> const Eigen::Vector3d &
+                     { return config_.angularGainP; }, [this](const Eigen::Vector3d & v) { config_.angularGainP = v; }),
+                 mc_rtc::gui::ArrayInput(
+                     "Angular D-Gain", {"x", "y", "z"},
+                     [this]() -> const Eigen::Vector3d & { return config_.angularGainD; },
+                     [this](const Eigen::Vector3d & v) { config_.angularGainD = v; }));
 }
 
 void CentroidalManagerDDP::addToLogger(mc_rtc::Logger & logger)
@@ -78,9 +78,9 @@ void CentroidalManagerDDP::addToLogger(mc_rtc::Logger & logger)
 
   logger.addLogEntry(config_.name + "_DDP_computationDuration", this,
                      [this]() { return ddp_->ddp_solver_->computationDuration().solve; });
-  logger.addLogEntry(config_.name + "_DDP_iter", this, [this]() {
-    return ddp_->ddp_solver_->traceDataList().empty() ? 0 : ddp_->ddp_solver_->traceDataList().back().iter;
-  });
+  logger.addLogEntry(
+      config_.name + "_DDP_iter", this, [this]()
+      { return ddp_->ddp_solver_->traceDataList().empty() ? 0 : ddp_->ddp_solver_->traceDataList().back().iter; });
 }
 
 void CentroidalManagerDDP::runMpc()
@@ -108,6 +108,18 @@ void CentroidalManagerDDP::runMpc()
       std::bind(&CentroidalManagerDDP::calcMpcRefData, this, std::placeholders::_1), initialParam, ctl().t());
 
   const auto & motionParam = calcMpcMotionParam(ctl().t());
+  const auto & plannedWrenchList = ForceColl::calcWrenchList(motionParam.contact_list, plannedForceScales,
+                                                             controlData_.mpcCentroidalPose.translation());
+  const auto & contactList = ForceColl::getContactVecFromMap(ctl().limbManagerSet_->contactList(ctl().t()));
+  controlData_.targetFootCentroidalWrench = sva::ForceVecd::Zero();
+  for(size_t i = 0; i < motionParam.contact_list.size(); i++)
+  {
+    if(contactList[i]->name_.find("Foot") == std::string::npos)
+    {
+      continue;
+    }
+    controlData_.targetFootCentroidalWrench += plannedWrenchList[i];
+  }
   controlData_.plannedCentroidalWrench = ForceColl::calcTotalWrench(motionParam.contact_list, plannedForceScales,
                                                                     controlData_.mpcCentroidalPose.translation());
   controlData_.plannedCentroidalMomentum = sva::ForceVecd(ddp_->ddp_solver_->controlData().x_list[1].segment<3>(6),
