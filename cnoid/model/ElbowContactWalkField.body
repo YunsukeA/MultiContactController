@@ -12,11 +12,11 @@ links:
     parent: Root
     jointType: fixed
     material: Field
-    translation: [ -0.15, -0.3, 0.9 ]
-    rotation: [ 0, 1, 0, 1.0471975511965976 ]
+    translation: [ 0.5, -0.65, 1 ]
+    rotation: [ 1, 0, 0, -0.785398 ]
     elements:
       -
         type: Shape
-        translation: [ 0, 0, -0.01 ]
-        geometry: { type: Box, size: [ 0.2, 0.1, 0.02 ] }
+        translation: [ 0, 0, 0.15 ]
+        geometry: { type: Box, size: [ 1.5, 0.1, 0.02 ] }
         appearance: { material: { diffuseColor: [ 0.3, 0.5, 0.2 ] }}
