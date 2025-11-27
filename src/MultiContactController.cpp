@@ -6,6 +6,8 @@
 #include <mc_tasks/ObserverbasedImpedanceTask.h>
 #include <mc_tasks/OrientationTask.h>
 
+#include <mc_rbdyn/RobotLoader.h>
+
 #include <ForceColl/Contact.h>
 
 #include <MultiContactController/LimbManagerSet.h>
@@ -25,6 +27,8 @@ mc_rbdyn::RobotModulePtr addForceSensors(mc_rbdyn::RobotModulePtr rm, const mc_r
     {
       mc_rtc::log::success("[MultiContactController] Add force sensor {}", forceSensorConfig("name"));
       rm->_forceSensors.push_back(static_cast<mc_rbdyn::ForceSensor>(forceSensorConfig));
+      mc_rbdyn::RobotModulePtr canonicalModule = mc_rbdyn::RobotLoader::getRobotModule(rm->canonicalParameters());
+      canonicalModule->_forceSensors.push_back(static_cast<mc_rbdyn::ForceSensor>(forceSensorConfig));
     }
   }
   return rm;
